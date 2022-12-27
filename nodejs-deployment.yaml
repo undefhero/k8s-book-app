@@ -44,6 +44,7 @@ spec:
                   key: MONGO_PORT
                   name: env
             - name: MONGO_USERNAME
+              valueFrom:
                 secretKeyRef:
                   key: MONGO_USERNAME
                   name: mongo-secret
@@ -52,10 +53,9 @@ spec:
           ports:
             - containerPort: 8080
           resources: {}
-        initContainers:
-        - name: init-db
-          image: busybox
-          command: ['sh', '-c', 'until nc -z db:27017; do echo
-  waiting for db; sleep 2; done;']
+        # initContainers:
+        # - name: init-db
+        #   image: busybox
+        #   command: ['sh', '-c', 'until nc -z db:27017; do echo waiting for db; sleep 2; done;']
         restartPolicy: Always
 status: {}
